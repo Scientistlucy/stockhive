@@ -1,14 +1,14 @@
 import React from 'react';
-import TenantRegistrationForm from '../components/forms/TenantRegistrationForm';
+import LoginForm from '../components/forms/LoginForm';
 import AuthImage from '../assets/images/auth.png';
 
-export default function Register() {
+export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="bg-white rounded-2xl shadow-2xl flex overflow-hidden max-w-5xl w-full">
         {/* Left: form */}
         <div className="w-full md:w-1/2 p-8 lg:p-12">
-          <TenantRegistrationForm />
+          <LoginForm />
         </div>
 
         {/* Right: image */}
