@@ -160,3 +160,13 @@ CORS_ALLOWED_ORIGINS = [
 
 INSTALLED_APPS = SHARED_APPS + TENANT_APPS
 
+# Celery configuration
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+
+# settings.py
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "no-reply@example.com"
+
+

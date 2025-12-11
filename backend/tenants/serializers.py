@@ -12,4 +12,9 @@ class ClientSerializer(serializers.ModelSerializer):
             "county",
             "phone",
             "password",
+             "email",
         ]
+# Serializer for login
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
