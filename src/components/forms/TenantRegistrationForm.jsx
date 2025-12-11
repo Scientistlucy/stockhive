@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import AuthTabs from './AuthTabs';
 
 export default function TenantRegistrationForm() {
   const [formData, setFormData] = useState({
     companyName: '',
+    email: '',
     businessType: '',
     address: '',
     city: '',
@@ -19,10 +21,11 @@ export default function TenantRegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     const response = await axios.post('http://tenant1.localhost:8000/api/signup/', formData);
+      await axios.post('http://tenant1.localhost:8000/api/signup/', formData);
       alert('Account created successfully!');
       setFormData({
         companyName: '',
+        email: '',
         businessType: '',
         address: '',
         city: '',
@@ -38,17 +41,7 @@ export default function TenantRegistrationForm() {
 
   return (
     <>
-      {/* Tabs */}
-      <div className="flex gap-4 mb-6">
-        <button className="px-5 py-2 border-2 border-blue-600 text-blue-600 rounded-md font-semibold text-sm">
-          LOG IN
-        </button>
-        <button className="px-5 py-2 text-gray-500 font-semibold text-sm hover:text-blue-600">
-          REGISTER
-        </button>
-      </div>
-
-      {/* Title */}
+    <AuthTabs activeTab="register" />
       <h2 className="text-3xl font-bold text-gray-900 mb-2">
         Create Your Account
       </h2>
@@ -56,107 +49,90 @@ export default function TenantRegistrationForm() {
         Start managing your inventory today
       </p>
 
-      {/* Form */}
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        {/* Company Name */}
-        <div className="relative">
-          <input
-            type="text"
-            name="companyName"
-            placeholder="Company Name"
-            value={formData.companyName}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            required
-          />
-          <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg">🏢</span>
-        </div>
+      <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="companyName"
+          placeholder="Company Name"
+          value={formData.companyName}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
 
-        {/* Business Type / Industry */}
-        <div className="relative">
-          <input
-            type="text"
-            name="businessType"
-            placeholder="Business Type / Industry"
-            value={formData.businessType}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
 
-        {/* Address */}
-        <div className="relative">
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={formData.address}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <input
+          type="text"
+          name="businessType"
+          placeholder="Business Type / Industry"
+          value={formData.businessType}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
 
-        {/* City */}
-        <div className="relative">
-          <input
-            type="text"
-            name="city"
-            placeholder="Town/City"
-            value={formData.city}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <input
+          type="text"
+          name="address"
+          placeholder="Address"
+          value={formData.address}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
 
-        {/* County */}
-        <div className="relative">
-          <input
-            type="text"
-            name="county"
-            placeholder="County"
-            value={formData.county}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <input
+          type="text"
+          name="city"
+          placeholder="Town/City"
+          value={formData.city}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
 
-        {/* Phone */}
-        <div className="relative">
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Company Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <input
+          type="text"
+          name="county"
+          placeholder="County"
+          value={formData.county}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
 
-        {/* Password */}
-        <div className="relative">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-10 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            required
-          />
-          <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg cursor-pointer">
-            👁️
-          </span>
-        </div>
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Company Phone Number"
+          value={formData.phone}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
 
-        {/* Sign Up Button */}
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          required
+        />
+
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 mt-6 tracking-wide"
+          className="md:col-span-2 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 mt-4 tracking-wide"
         >
           SIGN UP
         </button>
